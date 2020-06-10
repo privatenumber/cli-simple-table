@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 // const table = new SimpleTable();
 
-// table.headers('Name', 'Emoji');
+// table.header('Name', 'Emoji');
 
 // table.row(chalk.red('Squid'), '🦑');
 // table.row(chalk.green('Frog'), '🐸');
@@ -19,7 +19,7 @@ const chalk = require('chalk');
 
 // const table = new SimpleTable();
 
-// table.headers({
+// table.header({
 // 	text: 'Long text',
 // 	maxWidth: 25,
 // },
