@@ -50,10 +50,10 @@ class SimpleTable {
 		return [
 
 			// Headers
-			this.columnMeta.map(({ text, longestLen, align, maxWidth }) => pad({
-				text: chalk.bold(text),
-				length: Math.min(longestLen, maxWidth),
-				align,
+			this.columnMeta.map((c) => pad({
+				text: chalk.bold(c.text),
+				length: Math.min(c.longestLen, c.maxWidth),
+				align: c.align,
 			})).join(columnFill),
 
 			'',
