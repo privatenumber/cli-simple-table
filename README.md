@@ -1,13 +1,15 @@
 <p align="center">
   <img src="/.github/screenshot-1.png" width="70%">
+  <br>
+  <a href="https://npm.im/cli-simple-table"><img src="https://badgen.net/npm/v/cli-simple-table"></a>
+  <a href="https://npm.im/cli-simple-table"><img src="https://badgen.net/npm/dm/cli-simple-table"></a>
+  <a href="https://packagephobia.now.sh/result?p=cli-simple-table"><img src="https://packagephobia.now.sh/badge?p=cli-simple-table"></a>
 </p>
 
-## :rocket: Install
+### Install
 ```sh
 npm i cli-simple-table
 ```
-
-## Simple API
 
 ### Basic usage
 ```js
@@ -48,3 +50,5 @@ table.row('Truncates really really long text', chalk.magenta('Colored long long 
 
 console.log(table.toString());
 ```
+
+
