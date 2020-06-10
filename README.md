@@ -6,7 +6,7 @@
   <a href="https://packagephobia.now.sh/result?p=cli-simple-table"><img src="https://packagephobia.now.sh/badge?p=cli-simple-table"></a>
   <br>
   <br>
-  _Simple CLI table for simple people_
+  <i>Simple CLI table for simple people</i>
 </p>
 
 ### Install
@@ -33,6 +33,25 @@ table.row(chalk.white('Panda'), '🐼');
 
 console.log(table);
 ```
+
+
+### Alignment
+```js
+const table = new SimpleTable();
+
+table.headers(
+  'Name',
+  {
+    text: 'Age',
+    align: 'right'
+  }
+);
+
+table.row('Steve', 26);
+
+console.log(table.toString());
+```
+
 
 ### Max column width
 ```js
