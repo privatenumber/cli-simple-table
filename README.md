@@ -4,6 +4,9 @@
   <a href="https://npm.im/cli-simple-table"><img src="https://badgen.net/npm/v/cli-simple-table"></a>
   <a href="https://npm.im/cli-simple-table"><img src="https://badgen.net/npm/dm/cli-simple-table"></a>
   <a href="https://packagephobia.now.sh/result?p=cli-simple-table"><img src="https://packagephobia.now.sh/badge?p=cli-simple-table"></a>
+  <br>
+  <br>
+  _Simple CLI table for simple people_
 </p>
 
 ### Install
