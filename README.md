@@ -1,8 +1,11 @@
 # cli-simple-table
-CLI simple table
 
+<p align="center"><img src="/.github/screenshot-1.png"></p>
 
 ```js
+const SimpleTable = require('cli-simple-table');
+const chalk = require('chalk');
+
 const table = new SimpleTable();
 
 table.headers('Name', 'Emoji');
@@ -16,8 +19,10 @@ table.row(chalk.cyan('Dolphin'), '🐬');
 table.row(chalk.white('Panda'), '🐼');
 
 console.log(table);
-
 ```
 
-<img src="/.github/screenshot-1.png">
+## :rocket: Install
+```sh
+npm i cli-simple-table
+```
 
