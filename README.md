@@ -5,12 +5,19 @@ CLI simple table
 ```js
 const table = new SimpleTable();
 
-table.headers('Column A', 'Column B');
+table.headers('Name', 'Emoji');
 
-table.row('cell 1', 'cell 2');
-table.row('cell 3', 'cell 4');
+table.row(chalk.red('Squid'), '🦑');
+table.row(chalk.green('Frog'), '🐸');
+table.row(chalk.yellow('Tiger'), '🐯');
+table.row(chalk.blue('Whale'), '🐳');
+table.row(chalk.magenta('Unicorn'), '🦄');
+table.row(chalk.cyan('Dolphin'), '🐬');
+table.row(chalk.white('Panda'), '🐼');
 
-console.log(table.toString());
+console.log(table);
+
 ```
 
+<img src="/.github/screenshot-1.png">
 
