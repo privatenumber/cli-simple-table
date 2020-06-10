@@ -2,6 +2,15 @@
   "name": "cli-simple-table",
   "version": "1.0.0",
   "description": "CLI simple table",
+  "keywords": [
+    "cli",
+    "table",
+    "simple",
+    "minimal"
+  ],
+  "files": [
+    "index.js"
+  ],
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
