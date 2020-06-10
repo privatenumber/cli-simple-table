@@ -22,8 +22,8 @@ class SimpleTable {
 		this.data = [];
 	}
 
-	headers(..._columns) {
-		this.columnMeta.push(..._columns.map((c) => {
+	header(...columns) {
+		this.columnMeta.push(...columns.map((c) => {
 			const text = typeof c === 'string' ? c : c.text;
 
 			return {
