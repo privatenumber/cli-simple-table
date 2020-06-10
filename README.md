@@ -7,7 +7,6 @@
 npm i cli-simple-table
 ```
 
-
 ## Simple API
 
 ### Basic usage
