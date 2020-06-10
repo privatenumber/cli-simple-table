@@ -1,5 +1,5 @@
-const SimpleTable = require('..');
 const chalk = require('chalk');
+const SimpleTable = require('..');
 
 test('Single row table', async () => {
 	const table = new SimpleTable();
@@ -49,7 +49,7 @@ test('Truncation', async () => {
 	const table = new SimpleTable();
 	table.headers('Header A', {
 		text: 'Header B',
-		maxWidth: 10
+		maxWidth: 10,
 	});
 	table.row(chalk.yellow('data a'.repeat(100)), chalk.cyan('data b').repeat(100));
 
