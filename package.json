@@ -1,0 +1,39 @@
+{
+  "name": "cli-simple-table",
+  "version": "1.0.0",
+  "description": "CLI simple table",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint -- --fix",
+      "jest --bail --findRelatedTests"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/privatenumber/cli-simple-table.git"
+  },
+  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/privatenumber/cli-simple-table/issues"
+  },
+  "homepage": "https://github.com/privatenumber/cli-simple-table#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "cli-truncate": "^2.1.0",
+    "strip-ansi": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.21.1",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.9"
+  }
+}
