@@ -31,7 +31,7 @@ table.row(chalk.magenta('Unicorn'), '🦄');
 table.row(chalk.cyan('Dolphin'), '🐬');
 table.row(chalk.white('Panda'), '🐼');
 
-console.log(table);
+console.log(table.toString());
 ```
 
 
