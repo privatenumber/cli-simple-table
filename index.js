@@ -11,19 +11,20 @@ const pad = ({
 	if (fillBy < 0) {
 		fillBy = 0;
 	}
+
 	const fill = ' '.repeat(fillBy);
 	return (align === 'left') ? (text + fill) : (fill + text);
 };
 
 class SimpleTable {
-	constructor({ columnPadding = 10 } = {}) {
+	constructor({columnPadding = 10} = {}) {
 		this.columnPadding = columnPadding;
 		this.columnMeta = [];
 		this.data = [];
 	}
 
 	header(...columns) {
-		this.columnMeta.push(...columns.map((c) => {
+		this.columnMeta.push(...columns.map(c => {
 			const text = typeof c === 'string' ? c : c.text;
 
 			return {
@@ -37,9 +38,9 @@ class SimpleTable {
 
 	row(...columns) {
 		columns.forEach((c, i) => {
-			const strLen = stripAnsi(c).length;
-			if (this.columnMeta[i].longestLen < strLen) {
-				this.columnMeta[i].longestLen = strLen;
+			const stringLength = stripAnsi(c).length;
+			if (this.columnMeta[i].longestLen < stringLength) {
+				this.columnMeta[i].longestLen = stringLength;
 			}
 		});
 		this.data.push(columns);
@@ -50,7 +51,7 @@ class SimpleTable {
 		return [
 
 			// Headers
-			this.columnMeta.map((c) => pad({
+			this.columnMeta.map(c => pad({
 				text: chalk.bold(c.text),
 				length: Math.min(c.longestLen, c.maxWidth),
 				align: c.align,
@@ -60,18 +61,19 @@ class SimpleTable {
 
 			// Rows
 			...this.data.map(
-				(row) => row.map((_text, i) => {
-					const { longestLen, align, maxWidth } = this.columnMeta[i];
-					const length = Math.min(longestLen, maxWidth);
+				row => row
+					.map((_text, i) => {
+						const {longestLen, align, maxWidth} = this.columnMeta[i];
+						const length = Math.min(longestLen, maxWidth);
 
-					let text = _text;
-					if (stripAnsi(text).length > length) {
-						text = truncate(text, length, { position: 'middle' });
-					}
+						let text = _text;
+						if (stripAnsi(text).length > length) {
+							text = truncate(text, length, {position: 'middle'});
+						}
 
-					return pad({ text, length, align });
-				})
-				.join(columnFill),
+						return pad({text, length, align});
+					})
+					.join(columnFill),
 			),
 		].join('\n');
 	}

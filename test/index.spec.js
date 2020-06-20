@@ -6,7 +6,7 @@ test('Single row table', async () => {
 	table.header('Column A', 'Column B');
 	table.row('data a', 'data b');
 
-	expect(table.toString()).toBe('\u001b[1mColumn A\u001b[22m          \u001b[1mColumn B\u001b[22m\n\ndata a            data b  ');
+	expect(table.toString()).toBe('\u001B[1mColumn A\u001B[22m          \u001B[1mColumn B\u001B[22m\n\ndata a            data b  ');
 });
 
 test('Multiple row table', async () => {
@@ -17,7 +17,7 @@ test('Multiple row table', async () => {
 	table.row('data c', 'data d');
 	table.row('data e', 'data f');
 
-	expect(table.toString()).toBe('\u001b[1mColumn A\u001b[22m          \u001b[1mColumn B\u001b[22m\n\ndata a            data b  \ndata c            data d  \ndata e            data f  ');
+	expect(table.toString()).toBe('\u001B[1mColumn A\u001B[22m          \u001B[1mColumn B\u001B[22m\n\ndata a            data b  \ndata c            data d  \ndata e            data f  ');
 });
 
 test('Align right', async () => {
@@ -34,7 +34,7 @@ test('Align right', async () => {
 	);
 	table.row('data a', 'data b');
 
-	expect(table.toString()).toBe('\u001b[1mColumn A\u001b[22m          \u001b[1mColumn B\u001b[22m\n\n  data a            data b');
+	expect(table.toString()).toBe('\u001B[1mColumn A\u001B[22m          \u001B[1mColumn B\u001B[22m\n\n  data a            data b');
 });
 
 test('With chalk', async () => {
@@ -42,7 +42,7 @@ test('With chalk', async () => {
 	table.header('Column A', 'Column B');
 	table.row(chalk.yellow('data a'), chalk.cyan('data b'));
 
-	expect(table.toString()).toBe('\u001b[1mColumn A\u001b[22m          \u001b[1mColumn B\u001b[22m\n\n\u001b[33mdata a\u001b[39m            \u001b[36mdata b\u001b[39m  ');
+	expect(table.toString()).toBe('\u001B[1mColumn A\u001B[22m          \u001B[1mColumn B\u001B[22m\n\n\u001B[33mdata a\u001B[39m            \u001B[36mdata b\u001B[39m  ');
 });
 
 test('Truncation', async () => {
@@ -53,5 +53,5 @@ test('Truncation', async () => {
 	});
 	table.row(chalk.yellow('data a'.repeat(100)), chalk.cyan('data b').repeat(100));
 
-	expect(table.toString()).toBe('\u001b[1mColumn A\u001b[22m                                                                        \u001b[1mColumn B\u001b[22m  \n\n\u001b[33mdata adata adata adata adata adata \u001b[39m…\u001b[33mta adata adata adata adata adata a\u001b[39m          \u001b[36mdata \u001b[39m…\u001b[36mta b\u001b[39m');
+	expect(table.toString()).toBe('\u001B[1mColumn A\u001B[22m                                                                        \u001B[1mColumn B\u001B[22m  \n\n\u001B[33mdata adata adata adata adata adata \u001B[39m…\u001B[33mta adata adata adata adata adata a\u001B[39m          \u001B[36mdata \u001B[39m…\u001B[36mta b\u001B[39m');
 });
