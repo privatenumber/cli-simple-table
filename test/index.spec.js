@@ -56,3 +56,14 @@ test('Truncation', async () => {
 
 	expect(stripAnsi(table.toString())).toBe('Column A                                                                        Column B  \n\ndata adata adata adata adata adata …ta adata adata adata adata adata a          data …ta b');
 });
+
+test('columnPadding', async () => {
+	const table = new SimpleTable({
+		columnPadding: 20,
+	});
+	table.header('A', 'B');
+	table.row('a', 'b');
+
+	expect(stripAnsi(table.toString())).toBe('A                    B\n\na                    b');
+});
+
