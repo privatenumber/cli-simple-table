@@ -67,3 +67,13 @@ test('columnPadding', async () => {
 	expect(stripAnsi(table.toString())).toBe('A                    B\n\na                    b');
 });
 
+test('headerSeparator', async () => {
+	const table = new SimpleTable({
+		headerSeparator: 0,
+	});
+	table.header('A', 'B');
+	table.row('a', 'b');
+
+	expect(stripAnsi(table.toString())).toBe('A          B\na          b');
+});
+

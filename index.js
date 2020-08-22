@@ -19,8 +19,10 @@ const pad = ({
 class SimpleTable {
 	constructor({
 		columnPadding = 10,
+		headerSeparator = 1,
 	} = {}) {
 		this.columnPadding = columnPadding;
+		this.headerSeparator = headerSeparator;
 		this.columnMeta = [];
 		this.data = [];
 	}
@@ -57,6 +59,10 @@ class SimpleTable {
 		})).join(columnFill);
 	}
 
+	renderHeaderSeparator() {
+		return new Array(this.headerSeparator).fill('');
+	}
+
 	renderRows() {
 		const columnFill = ' '.repeat(this.columnPadding);
 		return this.data.map(
@@ -79,7 +85,7 @@ class SimpleTable {
 	toString() {
 		return [
 			this.renderHeader(),
-			'',
+			...this.renderHeaderSeparator(),
 			...this.renderRows(),
 		].join('\n');
 	}
