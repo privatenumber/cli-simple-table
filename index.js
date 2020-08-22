@@ -17,7 +17,9 @@ const pad = ({
 };
 
 class SimpleTable {
-	constructor({columnPadding = 10} = {}) {
+	constructor({
+		columnPadding = 10,
+	} = {}) {
 		this.columnPadding = columnPadding;
 		this.columnMeta = [];
 		this.data = [];
@@ -46,35 +48,39 @@ class SimpleTable {
 		this.data.push(columns);
 	}
 
-	toString() {
+	renderHeader() {
 		const columnFill = ' '.repeat(this.columnPadding);
+		return this.columnMeta.map(c => pad({
+			text: chalk.bold(c.text),
+			length: Math.min(c.longestLen, c.maxWidth),
+			align: c.align,
+		})).join(columnFill);
+	}
+
+	renderRows() {
+		const columnFill = ' '.repeat(this.columnPadding);
+		return this.data.map(
+			row => row
+				.map((_text, i) => {
+					const {longestLen, align, maxWidth} = this.columnMeta[i];
+					const length = Math.min(longestLen, maxWidth);
+
+					let text = _text;
+					if (stripAnsi(text).length > length) {
+						text = truncate(text, length, {position: 'middle'});
+					}
+
+					return pad({text, length, align});
+				})
+				.join(columnFill),
+		);
+	}
+
+	toString() {
 		return [
-
-			// Headers
-			this.columnMeta.map(c => pad({
-				text: chalk.bold(c.text),
-				length: Math.min(c.longestLen, c.maxWidth),
-				align: c.align,
-			})).join(columnFill),
-
+			this.renderHeader(),
 			'',
-
-			// Rows
-			...this.data.map(
-				row => row
-					.map((_text, i) => {
-						const {longestLen, align, maxWidth} = this.columnMeta[i];
-						const length = Math.min(longestLen, maxWidth);
-
-						let text = _text;
-						if (stripAnsi(text).length > length) {
-							text = truncate(text, length, {position: 'middle'});
-						}
-
-						return pad({text, length, align});
-					})
-					.join(columnFill),
-			),
+			...this.renderRows(),
 		].join('\n');
 	}
 }
