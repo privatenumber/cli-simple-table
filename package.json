@@ -14,8 +14,9 @@
   ],
   "main": "index.js",
   "scripts": {
-    "lint": "xo && tsd",
-    "test": "jest"
+    "lint": "xo --fix",
+    "tsd": "tsd",
+    "test": "tsd && jest"
   },
   "husky": {
     "hooks": {
@@ -23,8 +24,9 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint -- --fix",
+    "*.[tj]s": [
+      "xo",
+      "npm run tsd -- --ignore",
       "jest --bail --findRelatedTests"
     ]
   },

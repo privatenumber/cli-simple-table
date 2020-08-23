@@ -1,4 +1,4 @@
-import { expectType } from 'tsd';
+import {expectType} from 'tsd';
 import SimpleTable = require('.');
 
 const table = new SimpleTable();
