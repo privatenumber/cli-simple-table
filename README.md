@@ -74,3 +74,8 @@ console.log(table.toString());
 ```
 
 
+## Options
+
+- `columnPadding` `<Number>` (`10`) - Number of characters to pad the column content with
+
+- `headerSeparator` `<Number>` (`1`) - Number of lines that separate the header from the table body
