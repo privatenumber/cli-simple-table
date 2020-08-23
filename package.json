@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "xo --fix",
     "tsd": "tsd",
-    "test": "tsd && jest"
+    "test": "jest"
   },
   "husky": {
     "hooks": {
