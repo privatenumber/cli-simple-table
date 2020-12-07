@@ -41,12 +41,17 @@ class SimpleTable {
 	}
 
 	row(...columns) {
-		columns.forEach((c, i) => {
-			const stringLength = stripAnsi(c).length;
-			if (this.columnMeta[i].longestLen < stringLength) {
-				this.columnMeta[i].longestLen = stringLength;
+		columns = columns.map((column, idx) => {
+			column = column.toString();
+
+			const stringLength = stripAnsi(column).length;
+			if (this.columnMeta[idx].longestLen < stringLength) {
+				this.columnMeta[idx].longestLen = stringLength;
 			}
+
+			return column;
 		});
+
 		this.data.push(columns);
 	}
 

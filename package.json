@@ -8,6 +8,13 @@
     "simple",
     "minimal"
   ],
+  "license": "MIT",
+  "repository": "privatenumber/cli-simple-table",
+  "funding": "https://github.com/privatenumber/cli-simple-table?sponsor=1",
+  "author": {
+    "name": "Hiroki Osame",
+    "email": "hiroki.osame@gmail.com"
+  },
   "files": [
     "index.js",
     "index.d.ts"
@@ -30,26 +37,16 @@
       "jest --bail --findRelatedTests"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/privatenumber/cli-simple-table.git"
-  },
-  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/privatenumber/cli-simple-table/issues"
-  },
-  "homepage": "https://github.com/privatenumber/cli-simple-table#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "cli-truncate": "^2.1.0",
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
-    "jest": "^26.4.2",
-    "lint-staged": "^10.2.11",
-    "tsd": "^0.13.1",
-    "xo": "^0.33.0"
+    "husky": "^4.3.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.3",
+    "tsd": "^0.14.0",
+    "xo": "^0.35.0"
   }
 }
