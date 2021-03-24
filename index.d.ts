@@ -22,4 +22,4 @@ declare class SimpleTable {
 	toString(): string;
 }
 
-export = SimpleTable;
+export default SimpleTable;

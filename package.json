@@ -15,11 +15,16 @@
 		"name": "Hiroki Osame",
 		"email": "hiroki.osame@gmail.com"
 	},
+	"type": "module",
 	"files": [
+		"index.cjs",
 		"index.js",
 		"index.d.ts"
 	],
-	"main": "index.js",
+	"exports": {
+		"import": "./index.js",
+		"require": "./index.cjs"
+	},
 	"scripts": {
 		"lint": "eslint .",
 		"tsd": "tsd && :",

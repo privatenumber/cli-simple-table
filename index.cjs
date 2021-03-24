@@ -1,6 +1,6 @@
-import stripAnsi from 'strip-ansi';
-import { bold } from 'colorette';
-import truncate from 'cli-truncate';
+const stripAnsi = require('strip-ansi');
+const { bold } = require('colorette');
+const truncate = require('cli-truncate');
 
 const pad = ({
 	text,
@@ -98,4 +98,4 @@ class SimpleTable {
 	}
 }
 
-export default SimpleTable;
+module.exports = SimpleTable;
