@@ -28,7 +28,7 @@ class SimpleTable {
 	}
 
 	header(...columns) {
-		this.columnMeta.push(...columns.map(c => {
+		this.columnMeta.push(...columns.map((c) => {
 			const text = typeof c === 'string' ? c : c.text;
 
 			return {
@@ -41,12 +41,12 @@ class SimpleTable {
 	}
 
 	row(...columns) {
-		columns = columns.map((column, idx) => {
+		columns = columns.map((column, index) => {
 			column = column.toString();
 
 			const stringLength = stripAnsi(column).length;
-			if (this.columnMeta[idx].longestLen < stringLength) {
-				this.columnMeta[idx].longestLen = stringLength;
+			if (this.columnMeta[index].longestLen < stringLength) {
+				this.columnMeta[index].longestLen = stringLength;
 			}
 
 			return column;
@@ -65,7 +65,9 @@ class SimpleTable {
 	}
 
 	renderHeaderSeparator() {
-		return new Array(this.headerSeparator).fill('');
+		return Array.from({
+			length: this.headerSeparator,
+		}).fill('');
 	}
 
 	renderRows() {
@@ -73,15 +75,15 @@ class SimpleTable {
 		return this.data.map(
 			row => row
 				.map((_text, i) => {
-					const {longestLen, align, maxWidth} = this.columnMeta[i];
+					const { longestLen, align, maxWidth } = this.columnMeta[i];
 					const length = Math.min(longestLen, maxWidth);
 
 					let text = _text;
 					if (stripAnsi(text).length > length) {
-						text = truncate(text, length, {position: 'middle'});
+						text = truncate(text, length, { position: 'middle' });
 					}
 
-					return pad({text, length, align});
+					return pad({ text, length, align });
 				})
 				.join(columnFill),
 		);
