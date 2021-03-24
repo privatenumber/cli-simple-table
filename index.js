@@ -1,5 +1,5 @@
 const stripAnsi = require('strip-ansi');
-const chalk = require('chalk');
+const { bold } = require('colorette');
 const truncate = require('cli-truncate');
 
 const pad = ({
@@ -58,7 +58,7 @@ class SimpleTable {
 	renderHeader() {
 		const columnFill = ' '.repeat(this.columnPadding);
 		return this.columnMeta.map(c => pad({
-			text: chalk.bold(c.text),
+			text: bold(c.text),
 			length: Math.min(c.longestLen, c.maxWidth),
 			align: c.align,
 		})).join(columnFill);
