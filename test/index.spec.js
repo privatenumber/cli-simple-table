@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+const colorette = require('colorette');
 const stripAnsi = require('strip-ansi');
 const SimpleTable = require('..');
 
@@ -65,10 +65,10 @@ test('Align right 2', async () => {
 	expect(stripAnsi(table.toString())).toBe('a                      b\n\n1340               10089\n822           7000000000\n733                  632');
 });
 
-test('With chalk', async () => {
+test('With colorette', async () => {
 	const table = new SimpleTable();
 	table.header('Column A', 'Column B');
-	table.row(chalk.yellow('data a'), chalk.cyan('data b'));
+	table.row(colorette.yellow('data a'), colorette.cyan('data b'));
 
 	expect(stripAnsi(table.toString())).toBe('Column A          Column B\n\ndata a            data b  ');
 });
@@ -79,7 +79,7 @@ test('Truncation', async () => {
 		text: 'Column B',
 		maxWidth: 10,
 	});
-	table.row(chalk.yellow('data a'.repeat(100)), chalk.cyan('data b').repeat(100));
+	table.row(colorette.yellow('data a'.repeat(100)), colorette.cyan('data b').repeat(100));
 
 	expect(stripAnsi(table.toString())).toBe('Column A                                                                        Column B  \n\ndata adata adata adata adata adata …ta adata adata adata adata adata a          data …ta b');
 });

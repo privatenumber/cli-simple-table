@@ -1,6 +1,6 @@
 dependencies:
-  chalk: 4.1.0
   cli-truncate: 2.1.0
+  colorette: 1.2.2
   strip-ansi: 6.0.0
 devDependencies:
   '@pvtnbr/eslint-config-base': 0.1.12_eslint@7.22.0
@@ -1219,6 +1219,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
     engines:
       node: '>=10'
     resolution:
@@ -1339,7 +1340,6 @@ packages:
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
   /colorette/1.2.2:
-    dev: true
     resolution:
       integrity: sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
   /combined-stream/1.0.8:
@@ -2544,6 +2544,7 @@ packages:
     resolution:
       integrity: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
   /has-flag/4.0.0:
+    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -5343,6 +5344,7 @@ packages:
   /supports-color/7.2.0:
     dependencies:
       has-flag: 4.0.0
+    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -5928,8 +5930,8 @@ packages:
       integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 specifiers:
   '@pvtnbr/eslint-config-base': ^0.1.12
-  chalk: ^4.1.0
   cli-truncate: ^2.1.0
+  colorette: ^1.2.2
   eslint: ^7.22.0
   husky: ^4.3.0
   jest: ^26.6.3

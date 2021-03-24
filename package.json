@@ -38,8 +38,8 @@
 		]
 	},
 	"dependencies": {
-		"chalk": "^4.1.0",
 		"cli-truncate": "^2.1.0",
+		"colorette": "^1.2.2",
 		"strip-ansi": "^6.0.0"
 	},
 	"devDependencies": {
