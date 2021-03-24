@@ -47,7 +47,7 @@ test('Align right 2', async () => {
 			align: 'right',
 		},
 	);
-	[
+	for (const file of [
 		{
 			a: 1340,
 			b: 10089,
@@ -60,7 +60,7 @@ test('Align right 2', async () => {
 			a: 733,
 			b: 632,
 		},
-	].forEach(file => table.row(file.a, file.b));
+	]) { table.row(file.a, file.b); }
 
 	expect(stripAnsi(table.toString())).toBe('a                      b\n\n1340               10089\n822           7000000000\n733                  632');
 });
@@ -103,4 +103,3 @@ test('headerSeparator', async () => {
 
 	expect(stripAnsi(table.toString())).toBe('A          B\na          b');
 });
-
