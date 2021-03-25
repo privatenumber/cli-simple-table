@@ -1,13 +1,18 @@
-const colorette = require('colorette');
-const stripAnsi = require('strip-ansi');
-const SimpleTable = require('..');
+import * as colorette from 'colorette';
+import stripAnsi from 'strip-ansi';
+import { test } from 'uvu';
+import * as assert from 'uvu/assert'; // eslint-disable-line node/file-extension-in-import
+import SimpleTable from '../dist/index.js';
 
 test('Single row table', async () => {
 	const table = new SimpleTable();
 	table.header('Column A', 'Column B');
 	table.row('data a', 'data b');
 
-	expect(stripAnsi(table.toString())).toBe('Column A          Column B\n\ndata a            data b  ');
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A          Column B\n\ndata a            data b  ',
+	);
 });
 
 test('Multiple row table', async () => {
@@ -18,7 +23,10 @@ test('Multiple row table', async () => {
 	table.row('data c', 'data d');
 	table.row('data e', 'data f');
 
-	expect(stripAnsi(table.toString())).toBe('Column A          Column B\n\ndata a            data b  \ndata c            data d  \ndata e            data f  ');
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A          Column B\n\ndata a            data b  \ndata c            data d  \ndata e            data f  ',
+	);
 });
 
 test('Align right', async () => {
@@ -35,7 +43,10 @@ test('Align right', async () => {
 	);
 	table.row('data a', 'data b');
 
-	expect(stripAnsi(table.toString())).toBe('Column A          Column B\n\n  data a            data b');
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A          Column B\n\n  data a            data b',
+	);
 });
 
 test('Align right 2', async () => {
@@ -62,7 +73,10 @@ test('Align right 2', async () => {
 		},
 	]) { table.row(file.a, file.b); }
 
-	expect(stripAnsi(table.toString())).toBe('a                      b\n\n1340               10089\n822           7000000000\n733                  632');
+	assert.is(
+		stripAnsi(table.toString()),
+		'a                      b\n\n1340               10089\n822           7000000000\n733                  632',
+	);
 });
 
 test('With colorette', async () => {
@@ -70,7 +84,10 @@ test('With colorette', async () => {
 	table.header('Column A', 'Column B');
 	table.row(colorette.yellow('data a'), colorette.cyan('data b'));
 
-	expect(stripAnsi(table.toString())).toBe('Column A          Column B\n\ndata a            data b  ');
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A          Column B\n\ndata a            data b  ',
+	);
 });
 
 test('Truncation', async () => {
@@ -81,7 +98,10 @@ test('Truncation', async () => {
 	});
 	table.row(colorette.yellow('data a'.repeat(100)), colorette.cyan('data b').repeat(100));
 
-	expect(stripAnsi(table.toString())).toBe('Column A                                                                        Column B  \n\ndata adata adata adata adata adata …ta adata adata adata adata adata a          data …ta b');
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A                                                                        Column B  \n\ndata adata adata adata adata adata …ta adata adata adata adata adata a          data …ta b',
+	);
 });
 
 test('columnPadding', async () => {
@@ -91,7 +111,10 @@ test('columnPadding', async () => {
 	table.header('A', 'B');
 	table.row('a', 'b');
 
-	expect(stripAnsi(table.toString())).toBe('A                    B\n\na                    b');
+	assert.is(
+		stripAnsi(table.toString()),
+		'A                    B\n\na                    b',
+	);
 });
 
 test('headerSeparator', async () => {
@@ -101,5 +124,10 @@ test('headerSeparator', async () => {
 	table.header('A', 'B');
 	table.row('a', 'b');
 
-	expect(stripAnsi(table.toString())).toBe('A          B\na          b');
+	assert.is(
+		stripAnsi(table.toString()),
+		'A          B\na          b',
+	);
 });
+
+test.run();
