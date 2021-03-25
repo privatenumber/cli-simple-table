@@ -1,52 +1,61 @@
 {
-  "name": "cli-simple-table",
-  "version": "0.0.0-semantic-release",
-  "description": "CLI simple table",
-  "keywords": [
-    "cli",
-    "table",
-    "simple",
-    "minimal"
-  ],
-  "license": "MIT",
-  "repository": "privatenumber/cli-simple-table",
-  "funding": "https://github.com/privatenumber/cli-simple-table?sponsor=1",
-  "author": {
-    "name": "Hiroki Osame",
-    "email": "hiroki.osame@gmail.com"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
-  "main": "index.js",
-  "scripts": {
-    "lint": "xo --fix",
-    "tsd": "tsd",
-    "test": "jest"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.[tj]s": [
-      "xo",
-      "npm run tsd -- --ignore",
-      "jest --bail --findRelatedTests"
-    ]
-  },
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "cli-truncate": "^2.1.0",
-    "strip-ansi": "^6.0.0"
-  },
-  "devDependencies": {
-    "husky": "^4.3.0",
-    "jest": "^26.6.3",
-    "lint-staged": "^10.5.3",
-    "tsd": "^0.14.0",
-    "xo": "^0.35.0"
-  }
+	"name": "cli-simple-table",
+	"version": "0.0.0-semantic-release",
+	"description": "CLI simple table",
+	"keywords": [
+		"cli",
+		"table",
+		"simple",
+		"minimal"
+	],
+	"license": "MIT",
+	"repository": "privatenumber/cli-simple-table",
+	"funding": "https://github.com/privatenumber/cli-simple-table?sponsor=1",
+	"author": {
+		"name": "Hiroki Osame",
+		"email": "hiroki.osame@gmail.com"
+	},
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.cjs"
+	},
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "tsup src --dts --format esm,cjs",
+		"lint": "eslint .",
+		"pretest": "npm run build",
+		"test": "uvu &:"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.[tj]s": [
+			"eslint",
+			"npm run test"
+		]
+	},
+	"dependencies": {
+		"cli-truncate": "^2.1.0",
+		"colorette": "^1.2.2",
+		"strip-ansi": "^6.0.0"
+	},
+	"devDependencies": {
+		"@pvtnbr/eslint-config-typescript": "^0.1.12",
+		"eslint": "^7.22.0",
+		"husky": "^4.3.0",
+		"lint-staged": "^10.5.3",
+		"tsup": "^4.8.19",
+		"typescript": "^4.2.3",
+		"uvu": "^0.5.1"
+	},
+	"eslintConfig": {
+		"extends": "@pvtnbr/eslint-config-typescript"
+	}
 }
