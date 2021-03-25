@@ -2,11 +2,28 @@ import stripAnsi from 'strip-ansi';
 import { bold } from 'colorette';
 import truncate from 'cli-truncate';
 
-const pad = ({
-	text,
-	length,
-	align,
-}) => {
+type Options = {
+	columnPadding?: number;
+	headerSeparator?: number;
+}
+
+type HeaderObject = {
+	text: string;
+	align?: 'left' | 'right';
+	maxWidth?: number;
+}
+
+type InternalHeaderObject = HeaderObject & {
+	longestLen?: number;
+}
+
+type Header = HeaderObject | string;
+
+const pad = (
+	text: string,
+	length: number,
+	align: HeaderObject['align'],
+) => {
 	let fillBy = length - stripAnsi(text).length;
 	if (fillBy < 0) {
 		fillBy = 0;
@@ -17,30 +34,47 @@ const pad = ({
 };
 
 class SimpleTable {
+	columnPadding: number;
+
+	headerSeparator: number;
+
+	columnMeta: InternalHeaderObject[];
+
+	data: string[][];
+
 	constructor({
 		columnPadding = 10,
 		headerSeparator = 1,
-	} = {}) {
+	}: Options = {}) {
 		this.columnPadding = columnPadding;
 		this.headerSeparator = headerSeparator;
 		this.columnMeta = [];
 		this.data = [];
 	}
 
-	header(...columns) {
-		this.columnMeta.push(...columns.map((c) => {
-			const text = typeof c === 'string' ? c : c.text;
+	header(...columns: Header[]): void {
+		this.columnMeta.push(...columns.map((column) => {
+			const headerObject: InternalHeaderObject = (
+				typeof column === 'string'
+					? {
+						text: column,
+						align: 'left' as const,
+						maxWidth: 70,
+					}
+					: {
+						text: column.text,
+						align: column.align ?? 'left',
+						maxWidth: column.maxWidth ?? 70,
+					}
+			);
 
-			return {
-				text,
-				align: c.align || 'left',
-				longestLen: stripAnsi(text).length,
-				maxWidth: c.maxWidth || 70,
-			};
+			headerObject.longestLen = stripAnsi(headerObject.text).length;
+
+			return headerObject;
 		}));
 	}
 
-	row(...columns) {
+	row(...columns: string[]): void {
 		columns = columns.map((column, index) => {
 			column = column.toString();
 
@@ -55,22 +89,23 @@ class SimpleTable {
 		this.data.push(columns);
 	}
 
-	renderHeader() {
+	renderHeader(): string {
 		const columnFill = ' '.repeat(this.columnPadding);
-		return this.columnMeta.map(c => pad({
-			text: bold(c.text),
-			length: Math.min(c.longestLen, c.maxWidth),
-			align: c.align,
-		})).join(columnFill);
+		return this.columnMeta.map(c => pad(
+			bold(c.text),
+			Math.min(c.longestLen, c.maxWidth),
+			c.align,
+		)).join(columnFill);
 	}
 
-	renderHeaderSeparator() {
-		return Array.from({
-			length: this.headerSeparator,
-		}).fill('');
+	renderHeaderSeparator(): string[] {
+		return Array.from(
+			{ length: this.headerSeparator },
+			() => '',
+		);
 	}
 
-	renderRows() {
+	renderRows(): string[] {
 		const columnFill = ' '.repeat(this.columnPadding);
 		return this.data.map(
 			row => row
@@ -83,13 +118,13 @@ class SimpleTable {
 						text = truncate(text, length, { position: 'middle' });
 					}
 
-					return pad({ text, length, align });
+					return pad(text, length, align);
 				})
 				.join(columnFill),
 		);
 	}
 
-	toString() {
+	toString(): string {
 		return [
 			this.renderHeader(),
 			...this.renderHeaderSeparator(),
