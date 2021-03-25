@@ -26,6 +26,7 @@
 	"scripts": {
 		"build": "tsup src --dts --format esm,cjs",
 		"lint": "eslint .",
+		"pretest": "npm run build",
 		"test": "uvu &:"
 	},
 	"husky": {
