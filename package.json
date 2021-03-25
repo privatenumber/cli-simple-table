@@ -23,6 +23,7 @@
 		"import": "./dist/index.js",
 		"require": "./dist/index.cjs"
 	},
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"build": "tsup src --dts --format esm,cjs",
 		"lint": "eslint .",
