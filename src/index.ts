@@ -79,8 +79,10 @@ class SimpleTable {
 			column = column.toString();
 
 			const stringLength = stripAnsi(column).length;
-			if (this.columnMeta[index].longestLen < stringLength) {
-				this.columnMeta[index].longestLen = stringLength;
+
+			const columnMeta = this.columnMeta[index]!;
+			if ((columnMeta.longestLen ?? 0) < stringLength) {
+				columnMeta.longestLen = stringLength;
 			}
 
 			return column;
@@ -93,7 +95,7 @@ class SimpleTable {
 		const columnFill = ' '.repeat(this.columnPadding);
 		return this.columnMeta.map(c => pad(
 			bold(c.text),
-			Math.min(c.longestLen, c.maxWidth),
+			Math.min(c.longestLen ?? 0, c.maxWidth ?? 0),
 			c.align,
 		)).join(columnFill);
 	}
@@ -111,7 +113,7 @@ class SimpleTable {
 			row => row
 				.map((_text, i) => {
 					const { longestLen, align, maxWidth } = this.columnMeta[i];
-					const length = Math.min(longestLen, maxWidth);
+					const length = Math.min(longestLen ?? 0, maxWidth ?? 0);
 
 					let text = _text;
 					if (stripAnsi(text).length > length) {
