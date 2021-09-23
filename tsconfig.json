@@ -1,6 +1,17 @@
 {
 	"compilerOptions": {
 		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true
-	}
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"strict": true,
+
+		"declaration": true,
+		"outDir": "dist",
+
+		// Target Node.js 12
+		"lib": ["ES2019"],
+		"target": "ES2019",
+		"module": "commonjs",
+	},
+	"include": ["src"]
 }

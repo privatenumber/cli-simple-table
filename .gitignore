@@ -15,5 +15,8 @@ node_modules
 .env
 .env.test
 
+# VSCode
+.vscode
+
 # Distribution
 dist
