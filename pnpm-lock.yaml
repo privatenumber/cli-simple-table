@@ -5,7 +5,6 @@ specifiers:
   '@types/node': ^16.11.12
   cli-truncate: ^2.1.0
   colorette: ^2.0.7
-  es-jest: ^1.5.0
   esbuild: ^0.14.3
   esbuild-register: ^3.2.1
   eslint: ^8.4.1
@@ -24,7 +23,6 @@ dependencies:
 devDependencies:
   '@pvtnbr/eslint-config': 0.7.1_eslint@8.4.1+typescript@4.5.3
   '@types/node': 16.11.12
-  es-jest: 1.5.0
   esbuild: 0.14.3
   esbuild-register: 3.2.1_esbuild@0.14.3
   eslint: 8.4.1
@@ -935,13 +933,6 @@ packages:
       string.prototype.trimend: 1.0.4
       string.prototype.trimstart: 1.0.4
       unbox-primitive: 1.0.1
-    dev: true
-
-  /es-jest/1.5.0:
-    resolution: {integrity: sha512-LC6IKr3IqmdYeFCnmi53vktU4GB0CAWFQ2HPi8hoab5jvtaBy62P7mFNnARw5Es3hgF99qiB0c/0N0eBsk8Cww==}
-    engines: {node: '>=10'}
-    dependencies:
-      esbuild: 0.12.29
     dev: true
 
   /es-to-primitive/1.2.1:
