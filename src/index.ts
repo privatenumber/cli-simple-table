@@ -36,11 +36,11 @@ const pad = (
 	return (align === 'left') ? (text + fill) : (fill + text);
 };
 
-const createHeaderObject = (obj?: Partial<InternalHeaderObject>): InternalHeaderObject => ({
+const createHeaderObject = (object?: Partial<InternalHeaderObject>): InternalHeaderObject => ({
 	align: 'left' as const,
 	maxWidth: 70,
 	longestLen: 0,
-	...obj,
+	...object,
 });
 
 class SimpleTable {
@@ -94,7 +94,7 @@ class SimpleTable {
 
 		columns = columns.map((column, index) => {
 			column = column.toString();
-			
+
 			const stringLength = stripAnsi(column).length;
 			const columnMeta = this.columnMeta[index];
 			if (columnMeta.longestLen < stringLength) {
@@ -142,7 +142,7 @@ class SimpleTable {
 	}
 
 	toString() {
-		const hasHeader = this.columnMeta.filter(c => c.text).length > 0;
+		const hasHeader = this.columnMeta.some(c => 'text' in c);
 		return [
 			...(
 				hasHeader
