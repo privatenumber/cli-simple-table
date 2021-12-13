@@ -8,13 +8,16 @@ type Options = {
 }
 
 type HeaderObject = {
-	text: string;
+	text?: string;
 	align?: 'left' | 'right';
 	maxWidth?: number;
 }
 
-type InternalHeaderObject = HeaderObject & {
-	longestLen?: number;
+type InternalHeaderObject = {
+	text?: string;
+	align: 'left' | 'right';
+	longestLen: number;
+	maxWidth: number;
 }
 
 type Header = HeaderObject | string;
@@ -32,6 +35,13 @@ const pad = (
 	const fill = ' '.repeat(fillBy);
 	return (align === 'left') ? (text + fill) : (fill + text);
 };
+
+const createHeaderObject = (obj?: Partial<InternalHeaderObject>): InternalHeaderObject => ({
+	align: 'left' as const,
+	maxWidth: 70,
+	longestLen: 0,
+	...obj,
+});
 
 class SimpleTable {
 	columnPadding: number;
@@ -52,36 +62,42 @@ class SimpleTable {
 		this.data = [];
 	}
 
-	header(...columns: Header[]): void {
+	header(...columns: Header[]) {
 		this.columnMeta.push(...columns.map((column) => {
-			const headerObject: InternalHeaderObject = (
+			const headerObject = (
 				typeof column === 'string'
-					? {
-						text: column,
-						align: 'left' as const,
-						maxWidth: 70,
-					}
-					: {
+					? createHeaderObject({ text: column })
+					: createHeaderObject({
 						text: column.text,
 						align: column.align ?? 'left',
 						maxWidth: column.maxWidth ?? 70,
-					}
+					})
 			);
 
-			headerObject.longestLen = stripAnsi(headerObject.text).length;
+			headerObject.longestLen = stripAnsi(headerObject.text ?? '').length;
 
-			return headerObject;
+			return headerObject as InternalHeaderObject;
 		}));
 	}
 
-	row(...columns: string[]): void {
+	row(...columns: string[]) {
+		if (columns.length > this.columnMeta.length) {
+			const addColumns = columns.length - this.columnMeta.length;
+
+			this.columnMeta.push(
+				...Array.from(
+					{ length: addColumns },
+					() => createHeaderObject(),
+				),
+			);
+		}
+
 		columns = columns.map((column, index) => {
 			column = column.toString();
-
+			
 			const stringLength = stripAnsi(column).length;
-
-			const columnMeta = this.columnMeta[index]!;
-			if ((columnMeta.longestLen ?? 0) < stringLength) {
+			const columnMeta = this.columnMeta[index];
+			if (columnMeta.longestLen < stringLength) {
 				columnMeta.longestLen = stringLength;
 			}
 
@@ -91,45 +107,51 @@ class SimpleTable {
 		this.data.push(columns);
 	}
 
-	renderHeader(): string {
-		const columnFill = ' '.repeat(this.columnPadding);
-		return this.columnMeta.map(c => pad(
-			bold(c.text),
-			Math.min(c.longestLen ?? 0, c.maxWidth ?? 0),
-			c.align,
-		)).join(columnFill);
+	renderHeader() {
+		const padding = ' '.repeat(this.columnPadding);
+		return this.columnMeta
+			.map(c => pad(
+				bold(c.text!),
+				Math.min(c.longestLen, c.maxWidth),
+				c.align,
+			))
+			.join(padding);
 	}
 
-	renderHeaderSeparator(): string[] {
+	renderHeaderSeparator() {
 		return Array.from(
 			{ length: this.headerSeparator },
 			() => '',
 		);
 	}
 
-	renderRows(): string[] {
-		const columnFill = ' '.repeat(this.columnPadding);
+	renderRows() {
+		const padding = ' '.repeat(this.columnPadding);
 		return this.data.map(
 			row => row
-				.map((_text, i) => {
+				.map((text, i) => {
 					const { longestLen, align, maxWidth } = this.columnMeta[i];
-					const length = Math.min(longestLen ?? 0, maxWidth ?? 0);
-
-					let text = _text;
+					const length = Math.min(longestLen, maxWidth);
 					if (stripAnsi(text).length > length) {
 						text = truncate(text, length, { position: 'middle' });
 					}
-
 					return pad(text, length, align);
 				})
-				.join(columnFill),
+				.join(padding),
 		);
 	}
 
-	toString(): string {
+	toString() {
+		const hasHeader = this.columnMeta.filter(c => c.text).length > 0;
 		return [
-			this.renderHeader(),
-			...this.renderHeaderSeparator(),
+			...(
+				hasHeader
+					? [
+						this.renderHeader(),
+						...this.renderHeaderSeparator(),
+					]
+					: []
+			),
 			...this.renderRows(),
 		].join('\n');
 	}

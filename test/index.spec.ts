@@ -29,6 +29,16 @@ test('Multiple row table', async () => {
 	);
 });
 
+test('Headerless table', async () => {
+	const table = new SimpleTable();
+	table.row('data a', 'data b');
+
+	assert.is(
+		stripAnsi(table.toString()),
+		'data a          data b',
+	);
+});
+
 test('Align right', async () => {
 	const table = new SimpleTable();
 	table.header(
