@@ -58,6 +58,7 @@ test('Align right 2', async () => {
 			align: 'right',
 		},
 	);
+
 	for (const file of [
 		{
 			a: 1340,
@@ -71,7 +72,12 @@ test('Align right 2', async () => {
 			a: 733,
 			b: 632,
 		},
-	]) { table.row(file.a, file.b); }
+	]) {
+		table.row(
+			file.a.toString(),
+			file.b.toString(),
+		);
+	}
 
 	assert.is(
 		stripAnsi(table.toString()),
