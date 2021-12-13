@@ -28,7 +28,7 @@
 		"build": "tsup src --dts --format esm,cjs",
 		"lint": "eslint .",
 		"pretest": "npm run build",
-		"test": "uvu &:"
+		"test": "uvu -r esbuild-register test &:"
 	},
 	"husky": {
 		"hooks": {
@@ -49,6 +49,8 @@
 	"devDependencies": {
 		"@pvtnbr/eslint-config": "^0.7.1",
 		"@types/node": "^16.11.12",
+		"esbuild": "^0.14.3",
+		"esbuild-register": "^3.2.1",
 		"eslint": "^8.4.1",
 		"husky": "^4.3.0",
 		"lint-staged": "^11.1.2",

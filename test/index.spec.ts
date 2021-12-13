@@ -2,7 +2,7 @@ import * as colorette from 'colorette';
 import stripAnsi from 'strip-ansi';
 import { test } from 'uvu';
 import * as assert from 'uvu/assert'; // eslint-disable-line node/file-extension-in-import
-import SimpleTable from '../dist/index.js';
+import SimpleTable from '../src';
 
 test('Single row table', async () => {
 	const table = new SimpleTable();
