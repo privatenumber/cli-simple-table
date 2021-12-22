@@ -29,6 +29,32 @@ test('Multiple row table', async () => {
 	);
 });
 
+test('Headerless table', async () => {
+	const table = new SimpleTable();
+	table.row('data a', 'data b');
+
+	assert.is(
+		stripAnsi(table.toString()),
+		'data a          data b',
+	);
+});
+test('Header after', async () => {
+	const table = new SimpleTable();
+
+	table.row('data a', 'data b');
+	table.row('data c', 'data d');
+	table.row('data e', 'data f');
+
+	table.header('Column A', 'Column B');
+
+	console.log(table.toString());
+
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A          Column B\n\ndata a            data b  \ndata c            data d  \ndata e            data f  ',
+	);
+});
+
 test('Align right', async () => {
 	const table = new SimpleTable();
 	table.header(
@@ -58,6 +84,7 @@ test('Align right 2', async () => {
 			align: 'right',
 		},
 	);
+
 	for (const file of [
 		{
 			a: 1340,
@@ -71,7 +98,12 @@ test('Align right 2', async () => {
 			a: 733,
 			b: 632,
 		},
-	]) { table.row(file.a, file.b); }
+	]) {
+		table.row(
+			file.a.toString(),
+			file.b.toString(),
+		);
+	}
 
 	assert.is(
 		stripAnsi(table.toString()),
