@@ -63,7 +63,11 @@ class SimpleTable {
 	}
 
 	header(...columns: Header[]) {
-		this.columnMeta.push(...columns.map((column) => {
+		if (this.columnMeta.length > 0) {
+			console.warn('Header already exists - overwriting');
+		}
+
+		const headerColumns = columns.map((column, index) => {
 			const headerObject = (
 				typeof column === 'string'
 					? createHeaderObject({ text: column })
@@ -74,10 +78,21 @@ class SimpleTable {
 					})
 			);
 
-			headerObject.longestLen = stripAnsi(headerObject.text ?? '').length;
+			let columnLength = stripAnsi(headerObject.text ?? '').length;
+
+			if (
+				this.columnMeta[index]
+				&& this.columnMeta[index].longestLen > columnLength
+			) {
+				columnLength = this.columnMeta[index].longestLen;
+			}
+
+			headerObject.longestLen = columnLength;
 
 			return headerObject as InternalHeaderObject;
-		}));
+		});
+
+		this.columnMeta = headerColumns;
 	}
 
 	row(...columns: string[]) {

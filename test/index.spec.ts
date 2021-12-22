@@ -38,6 +38,22 @@ test('Headerless table', async () => {
 		'data a          data b',
 	);
 });
+test('Header after', async () => {
+	const table = new SimpleTable();
+
+	table.row('data a', 'data b');
+	table.row('data c', 'data d');
+	table.row('data e', 'data f');
+
+	table.header('Column A', 'Column B');
+
+	console.log(table.toString());
+
+	assert.is(
+		stripAnsi(table.toString()),
+		'Column A          Column B\n\ndata a            data b  \ndata c            data d  \ndata e            data f  ',
+	);
+});
 
 test('Align right', async () => {
 	const table = new SimpleTable();
