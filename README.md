@@ -16,61 +16,61 @@ npm i cli-simple-table
 
 ### Basic usage
 ```js
-const SimpleTable = require('cli-simple-table');
-const chalk = require('chalk');
+import SimpleTable from 'cli-simple-table'
+import chalk from 'chalk'
 
-const table = new SimpleTable();
+const table = new SimpleTable()
 
-table.header('Name', 'Emoji');
+table.header('Name', 'Emoji')
 
-table.row(chalk.red('Squid'), '🦑');
-table.row(chalk.green('Frog'), '🐸');
-table.row(chalk.yellow('Tiger'), '🐯');
-table.row(chalk.blue('Whale'), '🐳');
-table.row(chalk.magenta('Unicorn'), '🦄');
-table.row(chalk.cyan('Dolphin'), '🐬');
-table.row(chalk.white('Panda'), '🐼');
+table.row(chalk.red('Squid'), '🦑')
+table.row(chalk.green('Frog'), '🐸')
+table.row(chalk.yellow('Tiger'), '🐯')
+table.row(chalk.blue('Whale'), '🐳')
+table.row(chalk.magenta('Unicorn'), '🦄')
+table.row(chalk.cyan('Dolphin'), '🐬')
+table.row(chalk.white('Panda'), '🐼')
 
-console.log(table.toString());
+console.log(table.toString())
 ```
 
 
 ### Alignment
 ```js
-const table = new SimpleTable();
+const table = new SimpleTable()
 
 table.header(
-  'Name',
-  {
-    text: 'Age',
-    align: 'right'
-  }
-);
+    'Name',
+    {
+        text: 'Age',
+        align: 'right'
+    }
+)
 
-table.row('Steve', 26);
+table.row('Steve', 26)
 
-console.log(table.toString());
+console.log(table.toString())
 ```
 
 
 ### Max column width
 ```js
-const table = new SimpleTable();
+const table = new SimpleTable()
 
 table.header(
-  {
-    text: 'Long text',
-    maxWidth: 25,
-  },
-  {
-    text: 'Long long text',
-    maxWidth: 25,
-  }
-);
+    {
+        text: 'Long text',
+        maxWidth: 25
+    },
+    {
+        text: 'Long long text',
+        maxWidth: 25
+    }
+)
 
-table.row('Truncates really really long text', chalk.magenta('Colored long long text too'));
+table.row('Truncates really really long text', chalk.magenta('Colored long long text too'))
 
-console.log(table.toString());
+console.log(table.toString())
 ```
 
 
