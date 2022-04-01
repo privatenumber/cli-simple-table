@@ -172,4 +172,4 @@ class SimpleTable {
 	}
 }
 
-export = SimpleTable;
+export default SimpleTable;
